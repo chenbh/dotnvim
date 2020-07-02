@@ -40,5 +40,12 @@ nnoremap gD :YcmCompleter GoToDefinition<CR>
 nnoremap gI :YcmCompleter GoToImplementation<CR>
 nnoremap gt :YcmCompleter GetType<CR>
 
+" GoToImplementation populates the QuickFix list. By default <cr> is used to
+" open a file on the qf list, but we remapped it to save file on line 16.
+function! s:CustomYcmQuickFixWindow()
+  nnoremap o <cr>
+endfunction
+autocmd User YcmQuickFixOpened call s:CustomYcmQuickFixWindow()
+
 " populate location list
 let g:ycm_always_populate_location_list = 1
