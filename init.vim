@@ -38,7 +38,7 @@ Plug 'valloric/YouCompleteMe'
 Plug 'fatih/vim-go'
 Plug 'elmcast/elm-vim'
 Plug 'tpope/vim-vinegar'
-Plug 'tpope/vim-enuch'
+Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 call plug#end()
