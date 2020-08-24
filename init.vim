@@ -68,3 +68,6 @@ autocmd User YcmQuickFixOpened call s:CustomYcmQuickFixWindow()
 
 " populate location list
 let g:ycm_always_populate_location_list = 1
+
+" load lsp
+runtime ycm-lsp.vim
