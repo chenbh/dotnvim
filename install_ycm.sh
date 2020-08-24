@@ -13,5 +13,5 @@ else
 fi
 
 # install YCM
-./bundle/YouCompleteMe/install.py --go-completer
+./plugged/YouCompleteMe/install.py --go-completer
 

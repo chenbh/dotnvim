@@ -1,5 +1,3 @@
-execute pathogen#infect()
-
 " use bash to execute stuff
 set shell=/bin/bash
 
@@ -32,6 +30,18 @@ endif
 
 " disable scratch preview window
 set completeopt-=preview
+
+" Plugins
+call plug#begin('~/.config/nvim/plugged')
+Plug 'mileszs/ack.vim'
+Plug 'valloric/YouCompleteMe'
+Plug 'fatih/vim-go'
+Plug 'elmcast/elm-vim'
+Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-enuch'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+call plug#end()
 
 " vim-go
 let g:go_code_completion_enabled = 0
