@@ -37,6 +37,7 @@ Plug 'mileszs/ack.vim'
 Plug 'valloric/YouCompleteMe'
 Plug 'fatih/vim-go'
 Plug 'elmcast/elm-vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-commentary'
@@ -52,12 +53,18 @@ let g:go_def_mapping_enabled = 0
 let g:go_gopls_enabled = 0
 
 
+" fzf
+nnoremap <C-space> :FZF<cr>
+
+
 " YCM
 " sensible shortcuts
 nnoremap gd :YcmCompleter GoTo<CR>
 nnoremap gD :YcmCompleter GoToDefinition<CR>
-nnoremap gI :YcmCompleter GoToImplementation<CR>
+nnoremap gi :YcmCompleter GoToImplementation<CR>
 nnoremap gt :YcmCompleter GetType<CR>
+nnoremap gr :YcmCompleter GoToReferences<CR>
+nnoremap gf :YcmCompleter FixIt<CR>
 
 " GoToImplementation populates the QuickFix list. By default <cr> is used to
 " open a file on the qf list, but we remapped it to save file on line 16.
