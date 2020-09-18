@@ -31,12 +31,20 @@ endif
 " disable scratch preview window
 set completeopt-=preview
 
+
+function! BuildYCM(info)
+  if a:info.status == 'installed' || a:info.force
+    !../../setup_ycm_build.sh
+    !./install.py --go-completer
+  endif
+endfunction
+
+
 " Plugins
 call plug#begin('~/.config/nvim/plugged')
 Plug 'mileszs/ack.vim'
-Plug 'valloric/YouCompleteMe'
+Plug 'valloric/YouCompleteMe', { 'do': function('BuildYCM') }
 Plug 'fatih/vim-go'
-Plug 'elmcast/elm-vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-eunuch'
@@ -77,4 +85,4 @@ autocmd User YcmQuickFixOpened call s:CustomYcmQuickFixWindow()
 let g:ycm_always_populate_location_list = 1
 
 " load lsp
-runtime ycm-lsp.vim
+runtime ycm_lsp.vim

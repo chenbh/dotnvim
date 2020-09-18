@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# install neovim python3 bindings
-pip3 install pynvim
-
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
   sudo apt install build-essential cmake python3-dev
 elif [[ "$OSTYPE" == "darwin"* ]]; then
@@ -12,6 +9,5 @@ else
   exit 1
 fi
 
-# install YCM
-./plugged/YouCompleteMe/install.py --go-completer
-
+# install neovim python3 bindings
+pip3 install pynvim
