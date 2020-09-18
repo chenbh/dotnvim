@@ -45,6 +45,7 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'mileszs/ack.vim'
 Plug 'valloric/YouCompleteMe', { 'do': function('BuildYCM') }
 Plug 'fatih/vim-go'
+Plug 'elmcast/elm-vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-eunuch'
