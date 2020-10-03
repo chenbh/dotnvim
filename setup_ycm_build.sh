@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-  sudo apt install build-essential cmake python3-dev
+  sudo apt-get install -y build-essential cmake python3-dev
 elif [[ "$OSTYPE" == "darwin"* ]]; then
   brew install cmake python
 else
