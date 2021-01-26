@@ -69,7 +69,15 @@ Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
+Plug 'vito/booklit.vim'
+Plug 'morhetz/gruvbox'
 call plug#end()
+
+" color schemes
+set termguicolors
+syntax enable
+let g:gruvbox_contrast_dark = "dark"
+colorscheme gruvbox
 
 " vim-go
 let g:go_code_completion_enabled = 0
