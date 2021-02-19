@@ -16,6 +16,15 @@ nmap <cr> :w<cr>
 " clear highlights on space
 nmap <space> :noh<cr>
 
+" highligh trailing spaces
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
+
 " shorthand for window switching
 nmap <C-h> <C-w>h
 nmap <C-j> <C-w>j
@@ -30,6 +39,15 @@ endif
 
 " disable scratch preview window
 set completeopt-=preview
+
+" enable mouse clicking and scrolling
+set mouse=a
+
+" folds
+set foldmethod=syntax
+set foldlevel=999
+" close all toplevel folds
+nmap zT :%foldc<cr>
 
 
 function! BuildYCM(info)
@@ -50,6 +68,7 @@ Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
+Plug 'morhetz/gruvbox'
 call plug#end()
 
 " vim-go
@@ -61,7 +80,14 @@ let g:go_def_mapping_enabled = 0
 let g:go_gopls_enabled = 0
 
 
-" fzf
+" color schemes
+set termguicolors
+syntax enable
+let g:gruvbox_contrast_dark = "dark"
+colorscheme gruvbox
+
+
+" FZF
 nnoremap <C-space> :FZF<cr>
 
 
