@@ -22,5 +22,5 @@ jobs:
 
       - name: merge
         run: |
-          git merge master
+          git merge origin/master -m "sync with master"
           git push
