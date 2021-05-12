@@ -93,6 +93,10 @@ nnoremap t :OpenTerm<cr>
 cnoreabbrev ! OpenTerm
 
 
+" language-specific configuration
+runtime! lang/*.vim
+
+
 " YCM
 " sensible shortcuts
 nnoremap gd :YcmCompleter GoTo<CR>
