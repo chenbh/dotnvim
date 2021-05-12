@@ -140,5 +140,8 @@ nnoremap yr :YcmRestartServer<CR>
 " populate location list
 let g:ycm_always_populate_location_list = 1
 
+" autoload trusted ycm_extra_conf
+let g:ycm_extra_conf_globlist = ['~/workspace/baggageclaim/*', '~/workspace/concourse/*']
+
 " load lsp
 runtime ycm_lsp.vim
