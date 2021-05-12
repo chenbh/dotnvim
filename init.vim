@@ -15,6 +15,17 @@ nmap <cr> :w<cr>
 
 " clear highlights on space
 nmap <space> :noh<cr>
+" but don't break the built in open file functionality
+nnoremap o <cr>
+
+" highligh trailing spaces
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
 
 " highligh trailing spaces
 highlight ExtraWhitespace ctermbg=red guibg=red
@@ -42,6 +53,9 @@ set completeopt-=preview
 
 " enable mouse clicking and scrolling
 set mouse=a
+
+" open quickfix files in last used window
+set switchbuf=uselast
 
 " folds
 set foldmethod=syntax
@@ -88,8 +102,25 @@ let g:go_def_mapping_enabled = 0
 let g:go_gopls_enabled = 0
 
 
-" fzf
+" color schemes
+set termguicolors
+syntax enable
+let g:gruvbox_contrast_dark = "dark"
+colorscheme gruvbox
+
+
+" FZF
 nnoremap <C-space> :FZF<cr>
+
+
+" terminal
+command -nargs=? OpenTerm vnew | term <args>
+nnoremap t :OpenTerm<cr>
+cnoreabbrev ! OpenTerm
+
+
+" language-specific configuration
+runtime! lang/*.vim
 
 
 " YCM
@@ -101,12 +132,9 @@ nnoremap gt :YcmCompleter GetType<CR>
 nnoremap gr :YcmCompleter GoToReferences<CR>
 nnoremap gf :YcmCompleter FixIt<CR>
 
-" GoToImplementation populates the QuickFix list. By default <cr> is used to
-" open a file on the qf list, but we remapped it to save file on line 16.
-function! s:CustomYcmQuickFixWindow()
-  nnoremap o <cr>
-endfunction
-autocmd User YcmQuickFixOpened call s:CustomYcmQuickFixWindow()
+nnoremap yi :YcmShowDetailedDiagnostic<CR>
+nnoremap yr :YcmRestartServer<CR>
+
 
 " populate location list
 let g:ycm_always_populate_location_list = 1
