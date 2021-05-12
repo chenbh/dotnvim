@@ -15,6 +15,8 @@ nmap <cr> :w<cr>
 
 " clear highlights on space
 nmap <space> :noh<cr>
+" but don't break the built in open file functionality
+nnoremap o <cr>
 
 " highligh trailing spaces
 highlight ExtraWhitespace ctermbg=red guibg=red
@@ -42,6 +44,9 @@ set completeopt-=preview
 
 " enable mouse clicking and scrolling
 set mouse=a
+
+" open quickfix files in last used window
+set switchbuf=uselast
 
 " folds
 set foldmethod=syntax
@@ -91,12 +96,9 @@ nnoremap gt :YcmCompleter GetType<CR>
 nnoremap gr :YcmCompleter GoToReferences<CR>
 nnoremap gf :YcmCompleter FixIt<CR>
 
-" GoToImplementation populates the QuickFix list. By default <cr> is used to
-" open a file on the qf list, but we remapped it to save file on line 16.
-function! s:CustomYcmQuickFixWindow()
-  nnoremap o <cr>
-endfunction
-autocmd User YcmQuickFixOpened call s:CustomYcmQuickFixWindow()
+nnoremap yi :YcmShowDetailedDiagnostic<CR>
+nnoremap yr :YcmRestartServer<CR>
+
 
 " populate location list
 let g:ycm_always_populate_location_list = 1
