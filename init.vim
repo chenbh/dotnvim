@@ -73,6 +73,7 @@ Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'morhetz/gruvbox'
+Plug 'airblade/vim-gitgutter'
 call plug#end()
 
 
