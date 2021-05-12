@@ -87,6 +87,12 @@ colorscheme gruvbox
 nnoremap <C-space> :FZF<cr>
 
 
+" terminal
+command -nargs=? OpenTerm vnew | term <args>
+nnoremap t :OpenTerm<cr>
+cnoreabbrev ! OpenTerm
+
+
 " YCM
 " sensible shortcuts
 nnoremap gd :YcmCompleter GoTo<CR>
