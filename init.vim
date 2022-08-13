@@ -33,10 +33,10 @@ nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
 
-" use ag instead of ack
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep --smart-case'
-  cnoreabbrev Ag Ack
+" use rg instead of ack
+if executable('rg')
+  let g:ackprg = 'rg --vimgrep --smart-case'
+  cnoreabbrev Rg Ack
 endif
 
 " disable scratch preview window
