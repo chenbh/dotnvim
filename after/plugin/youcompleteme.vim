@@ -5,7 +5,7 @@ nnoremap gi :YcmCompleter GoToImplementation<CR>
 nnoremap gy :YcmCompleter GetType<CR>
 nnoremap gr :YcmCompleter GoToReferences<CR>
 nnoremap gf :YcmCompleter FixIt<CR>
-nnoremap gR :YcmCompleter RefactorRename
+nnoremap gR :YcmCompleter RefactorRename 
 
 nnoremap yi :YcmShowDetailedDiagnostic<CR>
 nnoremap yr :YcmRestartServer<CR>
