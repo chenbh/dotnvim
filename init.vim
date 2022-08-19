@@ -15,8 +15,12 @@ nmap <cr> :w<cr>
 
 " clear highlights on space
 nmap <space> :noh<cr>
-" but don't break the built in open file functionality
-nnoremap o <cr>
+
+" except for in quickfix and location lists
+augroup quickfix
+  autocmd FileType qf nnoremap <buffer> <cr> <cr>
+  autocmd FileType qf nmap <buffer> o <cr>
+augroup end
 
 " highligh trailing spaces
 highlight ExtraWhitespace ctermbg=red guibg=red
@@ -38,6 +42,15 @@ if executable('rg')
   let g:ackprg = 'rg --vimgrep --smart-case'
   cnoreabbrev Rg Ack
 endif
+
+" alternative way of esc
+inoremap jk <esc>
+inoremap kj <esc>
+
+" scrolling (without moving cursor)
+nnoremap <C-e> 5<C-e>
+nnoremap <C-y> 5<C-y>
+
 
 " disable scratch preview window
 set completeopt-=preview
@@ -84,6 +97,7 @@ let g:go_imports_autosave = 1
 let g:go_fmt_command = "goimports"
 let g:go_def_mapping_enabled = 0
 let g:go_gopls_enabled = 0
+let g:go_template_autocreate = 0
 
 
 " color schemes
@@ -107,14 +121,19 @@ cnoreabbrev ! OpenTerm
 runtime! lang/*.vim
 
 
+" increase maxmempattern to search in large files
+set mmp=2000000
+
+
 " YCM
 " sensible shortcuts
 nnoremap gd :YcmCompleter GoTo<CR>
 nnoremap gD :YcmCompleter GoToDefinition<CR>
 nnoremap gi :YcmCompleter GoToImplementation<CR>
-nnoremap gt :YcmCompleter GetType<CR>
+nnoremap gy :YcmCompleter GetType<CR>
 nnoremap gr :YcmCompleter GoToReferences<CR>
 nnoremap gf :YcmCompleter FixIt<CR>
+nnoremap gR :YcmCompleter RefactorRename
 
 nnoremap yi :YcmShowDetailedDiagnostic<CR>
 nnoremap yr :YcmRestartServer<CR>
