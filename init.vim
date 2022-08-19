@@ -90,25 +90,12 @@ Plug 'morhetz/gruvbox'
 Plug 'airblade/vim-gitgutter'
 call plug#end()
 
-" vim-go
-let g:go_code_completion_enabled = 0
-let g:go_fmt_fail_silently = 1
-let g:go_imports_autosave = 1
-let g:go_fmt_command = "goimports"
-let g:go_def_mapping_enabled = 0
-let g:go_gopls_enabled = 0
-let g:go_template_autocreate = 0
-
 
 " color schemes
 set termguicolors
 syntax enable
 let g:gruvbox_contrast_dark = "dark"
 colorscheme gruvbox
-
-
-" FZF
-nnoremap <C-space> :FZF<cr>
 
 
 " terminal
@@ -123,24 +110,3 @@ runtime! lang/*.vim
 
 " increase maxmempattern to search in large files
 set mmp=2000000
-
-
-" YCM
-" sensible shortcuts
-nnoremap gd :YcmCompleter GoTo<CR>
-nnoremap gD :YcmCompleter GoToDefinition<CR>
-nnoremap gi :YcmCompleter GoToImplementation<CR>
-nnoremap gy :YcmCompleter GetType<CR>
-nnoremap gr :YcmCompleter GoToReferences<CR>
-nnoremap gf :YcmCompleter FixIt<CR>
-nnoremap gR :YcmCompleter RefactorRename
-
-nnoremap yi :YcmShowDetailedDiagnostic<CR>
-nnoremap yr :YcmRestartServer<CR>
-
-
-" populate location list
-let g:ycm_always_populate_location_list = 1
-
-" load lsp
-runtime ycm_lsp.vim
