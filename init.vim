@@ -82,6 +82,7 @@ Plug 'mileszs/ack.vim'
 Plug 'valloric/YouCompleteMe', { 'do': function('BuildYCM') }
 Plug 'fatih/vim-go'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-commentary'
@@ -110,3 +111,6 @@ runtime! lang/*.vim
 
 " increase maxmempattern to search in large files
 set mmp=2000000
+
+" always use system clipboard for yanks
+set clipboard+=unnamedplus
