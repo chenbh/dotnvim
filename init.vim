@@ -1,13 +1,24 @@
 " Plugins
 call plug#begin('~/.config/nvim/plugged')
 Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+
+Plug 'SirVer/ultisnips'
+Plug 'quangnguyen30192/cmp-nvim-ultisnips'
+
 Plug 'mileszs/ack.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
+
 Plug 'morhetz/gruvbox'
 Plug 'airblade/vim-gitgutter'
 call plug#end()
@@ -63,7 +74,7 @@ nnoremap <C-e> 5<C-e>
 nnoremap <C-y> 5<C-y>
 
 " disable scratch preview window
-set completeopt-=preview
+set completeopt=menu,menuone,noselect
 
 " enable mouse clicking and scrolling
 set mouse=a
@@ -96,3 +107,5 @@ set mmp=2000000
 
 " always use system clipboard for yanks
 set clipboard+=unnamedplus
+
+lua require('lsp')
