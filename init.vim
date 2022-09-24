@@ -1,3 +1,18 @@
+" Plugins
+call plug#begin('~/.config/nvim/plugged')
+Plug 'neovim/nvim-lspconfig'
+Plug 'mileszs/ack.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+Plug 'morhetz/gruvbox'
+Plug 'airblade/vim-gitgutter'
+call plug#end()
+
+
 " use bash to execute stuff
 set shell=/bin/bash
 
@@ -43,14 +58,9 @@ if executable('rg')
   cnoreabbrev Rg Ack
 endif
 
-" alternative way of esc
-inoremap jk <esc>
-inoremap kj <esc>
-
 " scrolling (without moving cursor)
 nnoremap <C-e> 5<C-e>
 nnoremap <C-y> 5<C-y>
-
 
 " disable scratch preview window
 set completeopt-=preview
@@ -67,47 +77,19 @@ set foldlevel=999
 " close all toplevel folds
 nmap zT :%foldc<cr>
 
-
-function! BuildYCM(info)
-  if a:info.status == 'installed' || a:info.force
-    !../../setup_ycm_build.sh
-    !./install.py --go-completer
-  endif
-endfunction
-
-
-" Plugins
-call plug#begin('~/.config/nvim/plugged')
-Plug 'mileszs/ack.vim'
-Plug 'valloric/YouCompleteMe', { 'do': function('BuildYCM') }
-Plug 'fatih/vim-go'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'tpope/vim-vinegar'
-Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
-Plug 'morhetz/gruvbox'
-Plug 'airblade/vim-gitgutter'
-call plug#end()
-
-
 " color schemes
 set termguicolors
 syntax enable
 let g:gruvbox_contrast_dark = "dark"
 colorscheme gruvbox
 
-
 " terminal
 command -nargs=? OpenTerm vnew | term <args>
 nnoremap t :OpenTerm<cr>
 cnoreabbrev ! OpenTerm
 
-
 " language-specific configuration
 runtime! lang/*.vim
-
 
 " increase maxmempattern to search in large files
 set mmp=2000000
