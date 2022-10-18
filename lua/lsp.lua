@@ -2,11 +2,11 @@
 --
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap=true, silent=true }
-vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
-vim.keymap.set('n', '<space>N', vim.diagnostic.goto_prev, opts)
-vim.keymap.set('n', '<space>n', vim.diagnostic.goto_next, opts)
-vim.keymap.set('n', '<space>l', vim.diagnostic.setloclist, opts)
-vim.keymap.set('n', '<space>q', vim.diagnostic.setqflist, opts)
+vim.keymap.set('n', 'ee', vim.diagnostic.open_float, opts)
+vim.keymap.set('n', 'eN', vim.diagnostic.goto_prev, opts)
+vim.keymap.set('n', 'en', vim.diagnostic.goto_next, opts)
+vim.keymap.set('n', 'el', vim.diagnostic.setloclist, opts)
+vim.keymap.set('n', 'eq', vim.diagnostic.setqflist, opts)
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -105,7 +105,7 @@ cmp.setup.cmdline(':', {
 -- LSP servers
 --
 -- Set up lspconfig.
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 local lsp_flags = {
   -- This is the default in Nvim 0.7+
