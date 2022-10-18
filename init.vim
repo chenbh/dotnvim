@@ -96,16 +96,13 @@ colorscheme gruvbox
 
 " terminal
 command -nargs=? OpenTerm vnew | term <args>
-nnoremap t :OpenTerm<cr>
+nnoremap T :OpenTerm<cr>
 cnoreabbrev ! OpenTerm
-
-" language-specific configuration
-runtime! lang/*.vim
 
 " increase maxmempattern to search in large files
 set mmp=2000000
 
 " always use system clipboard for yanks
-set clipboard+=unnamedplus
+" set clipboard+=unnamedplus
 
 lua require('lsp')
