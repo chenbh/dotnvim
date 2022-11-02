@@ -106,3 +106,4 @@ set mmp=2000000
 " set clipboard+=unnamedplus
 
 lua require('lsp')
+lua require('project_settings')

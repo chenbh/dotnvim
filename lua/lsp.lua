@@ -116,43 +116,31 @@ local lsp_flags = {
 -- - :help lspconfig-all
 -- - https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 -- npm install -g vim-language-server
-require('lspconfig')['vimls'].setup{
-  capabilities = capabilities,
-  on_attach = on_attach,
-  flags = lsp_flags,
-}
+require('lspconfig')['vimls'].setup({
+  capabilities = capabilities, on_attach = on_attach, flags = lsp_flags,
+})
 
 -- npm install -g bash-language-server
-require('lspconfig')['bashls'].setup{
-  capabilities = capabilities,
-  on_attach = on_attach,
-  flags = lsp_flags,
-}
+require('lspconfig')['bashls'].setup({
+  capabilities = capabilities, on_attach = on_attach, flags = lsp_flags,
+})
 
 -- yarn global add yaml-language-server
-require('lspconfig')['yamlls'].setup{
-  capabilities = capabilities,
-  on_attach = on_attach,
-  flags = lsp_flags,
-}
+require('lspconfig')['yamlls'].setup({
+  capabilities = capabilities, on_attach = on_attach, flags = lsp_flags,
+})
 
 -- go install golang.org/x/tools/gopls@latest
-require('lspconfig')['gopls'].setup{
-  capabilities = capabilities,
-  on_attach = on_attach,
-  flags = lsp_flags,
-}
+require('lspconfig')['gopls'].setup({
+  capabilities = capabilities, on_attach = on_attach, flags = lsp_flags,
+})
 
-require('lspconfig')['clangd'].setup{
-  capabilities = capabilities,
-  on_attach = on_attach,
-  flags = lsp_flags,
-}
+require('lspconfig')['clangd'].setup({
+  capabilities = capabilities, on_attach = on_attach, flags = lsp_flags,
+})
 
 -- npm install -g pyright
-require('lspconfig')['pyright'].setup{
-  capabilities = capabilities,
-  on_attach = on_attach,
-  flags = lsp_flags,
-}
+require('lspconfig')['pyright'].setup({
+  capabilities = capabilities, on_attach = on_attach, flags = lsp_flags,
+})
 
