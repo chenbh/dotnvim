@@ -144,8 +144,7 @@ require('lspconfig')['pyright'].setup({
   capabilities = capabilities, on_attach = on_attach, flags = lsp_flags,
 })
 
--- go install github.com/arduino/arduino-language-server@latest
-require('lspconfig')['arduino_language_server'].setup({
+-- npm install -g typescript-language-server
+require('lspconfig')['tsserver'].setup({
   capabilities = capabilities, on_attach = on_attach, flags = lsp_flags,
-  cmd = {"arduino-language-server", "-fqbn", "esp8266:esp8266:nodemcu"}
 })
