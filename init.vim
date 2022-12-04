@@ -23,6 +23,8 @@ Plug 'morhetz/gruvbox'
 Plug 'airblade/vim-gitgutter'
 
 Plug 'maxmellon/vim-jsx-pretty'
+
+Plug 'sbdchd/neoformat'
 call plug#end()
 
 
