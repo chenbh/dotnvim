@@ -1,12 +1,4 @@
 -- organize imports on save
--- https://github.com/neovim/nvim-lspconfig/issues/115
-vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = { "*.go" },
-  callback = function()
-	  vim.lsp.buf.formatting_sync(nil, 3000)
-  end,
-})
-
 vim.api.nvim_create_autocmd("BufWritePre", {
 	pattern = { "*.go" },
 	callback = function()

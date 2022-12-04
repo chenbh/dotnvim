@@ -32,7 +32,16 @@ local on_attach = function(client, bufnr)
   -- vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
   -- vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
+
+  vim.api.nvim_create_autocmd("BufWritePre", {
+    pattern = { "*" },
+    callback = function()
+      vim.lsp.buf.formatting_sync(nil, 3000)
+    end,
+  })
 end
+
+
 
 
 -- hrsh7th/nvim-cmp Mappings.
