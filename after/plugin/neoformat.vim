@@ -6,5 +6,5 @@ let g:neoformat_enabled_css = ['prettier']
 
 augroup fmt
   autocmd!
-  autocmd BufWritePre * undojoin | Neoformat
+  autocmd BufWritePre *.css,*.py undojoin | Neoformat
 augroup END
