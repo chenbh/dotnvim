@@ -21,6 +21,8 @@ Plug 'tpope/vim-fugitive'
 
 Plug 'morhetz/gruvbox'
 Plug 'airblade/vim-gitgutter'
+
+Plug 'maxmellon/vim-jsx-pretty'
 call plug#end()
 
 

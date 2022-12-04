@@ -115,6 +115,7 @@ cmp.setup.cmdline(':', {
 --
 -- Set up lspconfig.
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 local lsp_flags = {
   -- This is the default in Nvim 0.7+
@@ -157,3 +158,9 @@ require('lspconfig')['pyright'].setup({
 require('lspconfig')['tsserver'].setup({
   capabilities = capabilities, on_attach = on_attach, flags = lsp_flags,
 })
+
+-- npm install -g vscode-langservers-extracted
+require('lspconfig')['cssls'].setup({
+  capabilities = capabilities, on_attach = on_attach, flags = lsp_flags,
+})
+
