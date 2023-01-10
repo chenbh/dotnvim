@@ -10,7 +10,7 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'SirVer/ultisnips'
 Plug 'quangnguyen30192/cmp-nvim-ultisnips'
 
-Plug 'mileszs/ack.vim'
+Plug 'jesseleite/vim-agriculture'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
@@ -41,41 +41,44 @@ set expandtab
 set number
 
 " save on enter
-nmap <cr> :w<cr>
+nnoremap <expr> <cr> &modifiable?":w\<cr>":"\<cr>"
 
 " clear highlights on space
 nmap <space> :noh<cr>
 
-" except for in quickfix and location lists
-augroup quickfix
-  autocmd FileType qf nnoremap <buffer> <cr> <cr>
-  autocmd FileType qf nmap <buffer> o <cr>
-augroup end
+" use "o" in additon to enter for quickfix/locationlist
+autocmd FileType qf nmap <buffer> o <cr>
 
 " highligh trailing spaces
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
-autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
-autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-autocmd BufWinLeave * call clearmatches()
+augroup HighlightWhiteSpace
+  autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+  autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+  autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+  autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+  autocmd BufWinLeave * call clearmatches()
+augroup end
 
-" shorthand for window switching
-nmap <C-h> <C-w>h
-nmap <C-j> <C-w>j
-nmap <C-k> <C-w>k
-nmap <C-l> <C-w>l
+" " shorthand for window switching
+" nnoremap <S-h> <C-w>h
+" nnoremap <S-j> <C-w>j
+" nnoremap <S-k> <C-w>k
+" nnoremap <S-l> <C-w>l
 
-" use rg instead of ack
-if executable('rg')
-  let g:ackprg = 'rg --vimgrep --smart-case'
-  cnoreabbrev Rg Ack
-endif
+" fast scrolling without moving cursor
+nnoremap <C-e> 10<C-e>
+nnoremap <C-y> 10<C-y>
 
-" scrolling (without moving cursor)
-nnoremap <C-e> 5<C-e>
-nnoremap <C-y> 5<C-y>
+" fast scrolling with cursor
+nnoremap <C-j> 10j
+nnoremap <C-k> 10k
+
+vnoremap <C-j> 10j
+vnoremap <C-k> 10k
+
+inoremap <C-j> <C-o>10j
+inoremap <C-k> <C-o>10k
 
 " disable scratch preview window
 set completeopt=menu,menuone,noselect
