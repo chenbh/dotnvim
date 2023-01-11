@@ -60,11 +60,11 @@ augroup HighlightWhiteSpace
   autocmd BufWinLeave * call clearmatches()
 augroup end
 
-" " shorthand for window switching
-" nnoremap <S-h> <C-w>h
-" nnoremap <S-j> <C-w>j
-" nnoremap <S-k> <C-w>k
-" nnoremap <S-l> <C-w>l
+" shorthand for window switching
+nnoremap <C-S-h> <C-w>h
+nnoremap <C-S-j> <C-w>j
+nnoremap <C-S-k> <C-w>k
+nnoremap <C-S-l> <C-w>l
 
 " fast scrolling without moving cursor
 nnoremap <C-e> 10<C-e>
