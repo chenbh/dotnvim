@@ -1,6 +1,16 @@
 -- neovim/nvim-lspconfig Mappings.
 --
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
+local function contains (tab, val)
+    for index, value in ipairs(tab) do
+        if value == val then
+            return true
+        end
+    end
+
+    return false
+end
+
 local opts = { noremap=true, silent=true }
 vim.keymap.set('n', 'ee', vim.diagnostic.open_float, opts)
 vim.keymap.set('n', 'eN', vim.diagnostic.goto_prev, opts)
@@ -39,6 +49,28 @@ local on_attach = function(client, bufnr)
       vim.lsp.buf.formatting_sync(nil, 3000)
     end,
   })
+
+  if client.server_capabilities.codeActionProvider ~= nil and
+    contains(client.server_capabilities.codeActionProvider.codeActionKinds, "source.organizeImports") then
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        buffer = bufnr,
+        callback = function()
+          local params = vim.lsp.util.make_range_params(nil, vim.lsp.util._get_offset_encoding())
+          params.context = {only = {"source.organizeImports"}}
+
+          local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, 3000)
+          for _, res in pairs(result or {}) do
+            for _, r in pairs(res.result or {}) do
+              if r.edit then
+                vim.lsp.util.apply_workspace_edit(r.edit, vim.lsp.util._get_offset_encoding())
+              else
+                vim.lsp.buf.execute_command(r.command)
+              end
+            end
+          end
+        end,
+      })
+  end
 end
 
 
