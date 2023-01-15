@@ -197,6 +197,9 @@ require('lspconfig')['pyright'].setup({
 -- npm install -g typescript-language-server
 require('lspconfig')['tsserver'].setup({
   capabilities = capabilities, on_attach = on_attach, flags = lsp_flags,
+  settings = {
+    typescript = { format = { semicolons = 'insert' } },
+  },
 })
 
 -- npm install -g vscode-langservers-extracted

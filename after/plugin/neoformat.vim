@@ -1,6 +1,5 @@
-" pip install yapf
-let g:neoformat_python_yapf = { 'exe': 'yapf', 'args': ['--style google'], 'stdin': 1 }
-let g:neoformat_enabled_python = ['yapf']
+" pip install black
+let g:neoformat_enabled_python = ['black']
 
 " npm install -g prettier
 let g:neoformat_enabled_css = ['prettier']
