@@ -43,6 +43,9 @@ set number
 " save on enter
 nnoremap <expr> <cr> &modifiable?":w\<cr>":"\<cr>"
 
+" exit buffer on shift+escape
+nnoremap <S-Esc> :q<cr>
+
 " clear highlights on space
 nmap <space> :noh<cr>
 
