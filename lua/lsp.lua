@@ -50,7 +50,7 @@ local on_attach = function(client, bufnr)
     end,
   })
 
-  if client.server_capabilities.codeActionProvider ~= nil and
+  if type(client.server_capabilities.codeActionProvider) == "table" and
     contains(client.server_capabilities.codeActionProvider.codeActionKinds, "source.organizeImports") then
       vim.api.nvim_create_autocmd("BufWritePre", {
         buffer = bufnr,
