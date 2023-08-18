@@ -39,14 +39,14 @@ local on_attach = function(client, bufnr)
   -- end, bufopts)
   -- vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
   vim.keymap.set('n', 'gR', vim.lsp.buf.rename, bufopts)
-  -- vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
+  vim.keymap.set('n', 'ga', vim.lsp.buf.code_action, bufopts)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
   -- vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
 
   vim.api.nvim_create_autocmd("BufWritePre", {
     pattern = { "*" },
     callback = function()
-      vim.lsp.buf.formatting_sync(nil, 3000)
+      vim.lsp.buf.format({async=false,timeout_ms=3000})
     end,
   })
 
@@ -170,6 +170,11 @@ require('lspconfig')['bashls'].setup({
 -- yarn global add yaml-language-server
 require('lspconfig')['yamlls'].setup({
   capabilities = capabilities, on_attach = on_attach, flags = lsp_flags,
+  settings = {
+    yaml = {
+      keyOrdering = false,
+    }
+  }
 })
 
 -- go install golang.org/x/tools/gopls@latest

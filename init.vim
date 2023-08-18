@@ -7,6 +7,8 @@ Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
 
+Plug 'sbdchd/neoformat'
+
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
 
@@ -18,13 +20,15 @@ Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
+Plug 'AndrewRadev/linediff.vim'
 
 Plug 'morhetz/gruvbox'
 Plug 'airblade/vim-gitgutter'
 
 Plug 'maxmellon/vim-jsx-pretty'
+Plug 'hashivim/vim-terraform'
+Plug 'cappyzawa/starlark.vim'
 
-Plug 'sbdchd/neoformat'
 call plug#end()
 
 
@@ -106,7 +110,7 @@ colorscheme gruvbox
 
 " terminal
 command -nargs=? OpenTerm vnew | term <args>
-nnoremap T :OpenTerm<cr>
+nnoremap <c-t> :OpenTerm<cr>
 cnoreabbrev ! OpenTerm
 
 " increase maxmempattern to search in large files
