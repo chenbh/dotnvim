@@ -71,6 +71,10 @@ local on_attach = function(client, bufnr)
         end,
       })
   end
+
+  if client.server_capabilities.inlayHintProvider then
+    vim.lsp.inlay_hint.enable(true)
+  end
 end
 
 
@@ -149,11 +153,6 @@ cmp.setup.cmdline(':', {
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-local lsp_flags = {
-  -- This is the default in Nvim 0.7+
-  debounce_text_changes = 150,
-}
-
 -- Full list at
 -- - :help lspconfig-all
 -- - https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
@@ -173,6 +172,9 @@ require('lspconfig')['yamlls'].setup({
   settings = {
     yaml = {
       keyOrdering = false,
+      schemaStore = {
+        enable = false,
+      }
     }
   }
 })
@@ -186,6 +188,13 @@ require('lspconfig')['gopls'].setup({
       analyses = { unusedparams = true, shadow = true },
       staticcheck = true,
       usePlaceholders = true,
+      -- hints = {
+      --   compositeLiteralFields = true,
+      --   constantValues = true,
+      --   functionTypeParameters = true,
+      --   parameterNames = true,
+      --   rangeVariableTypes = true,
+      -- },
     },
   },
 })

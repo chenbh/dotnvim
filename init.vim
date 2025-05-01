@@ -111,6 +111,7 @@ colorscheme gruvbox
 " terminal
 command -nargs=? OpenTerm vnew | term <args>
 nnoremap <c-t> :OpenTerm<cr>
+tnoremap <S-Esc> <C-\><C-n>
 cnoreabbrev ! OpenTerm
 
 " increase maxmempattern to search in large files
