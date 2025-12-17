@@ -6,8 +6,9 @@ Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
+Plug 'SmiteshP/nvim-navic'
 
-Plug 'sbdchd/neoformat'
+" Plug 'sbdchd/neoformat'
 
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
@@ -21,6 +22,7 @@ Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'AndrewRadev/linediff.vim'
+Plug 'tpope/vim-rhubarb'
 
 Plug 'morhetz/gruvbox'
 Plug 'airblade/vim-gitgutter'
@@ -28,6 +30,8 @@ Plug 'airblade/vim-gitgutter'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'hashivim/vim-terraform'
 Plug 'cappyzawa/starlark.vim'
+
+" Plug 'folke/neoconf.nvim'
 
 call plug#end()
 
@@ -84,8 +88,8 @@ nnoremap <C-k> 10k
 vnoremap <C-j> 10j
 vnoremap <C-k> 10k
 
-inoremap <C-j> <C-o>10j
-inoremap <C-k> <C-o>10k
+" inoremap <C-j> <C-o>10j
+" inoremap <C-k> <C-o>10k
 
 " disable scratch preview window
 set completeopt=menu,menuone,noselect
@@ -97,10 +101,12 @@ set mouse=a
 set switchbuf=uselast
 
 " folds
-set foldmethod=syntax
-set foldlevel=999
+" set foldmethod=expr
+" set foldexpr=v:lua.vim.lsp.foldexpr()
+set foldlevel=99
 " close all toplevel folds
 nmap zT :%foldc<cr>
+nmap zf zA
 
 " color schemes
 set termguicolors
@@ -120,5 +126,4 @@ set mmp=2000000
 " always use system clipboard for yanks
 " set clipboard+=unnamedplus
 
-lua require('lsp')
-lua require('project_settings')
+set exrc
