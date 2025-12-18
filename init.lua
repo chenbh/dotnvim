@@ -1,12 +1,183 @@
--- Too lazy to port init.vim to lua
-local vimrc = vim.fn.stdpath("config") .. "/vimrc.vim"
-vim.cmd.source(vimrc)
+-- Plugin management
+--
+local vim = vim
+local Plug = vim.fn['plug#']
+
+vim.call('plug#begin')
+Plug('neovim/nvim-lspconfig')
+Plug('hrsh7th/cmp-nvim-lsp')
+Plug('hrsh7th/cmp-buffer')
+Plug('hrsh7th/cmp-path')
+Plug('hrsh7th/cmp-cmdline')
+Plug('hrsh7th/nvim-cmp')
+Plug('SmiteshP/nvim-navic')
+
+Plug('sbdchd/neoformat')
+
+Plug('hrsh7th/cmp-vsnip')
+Plug('hrsh7th/vim-vsnip')
+
+Plug('jesseleite/vim-agriculture')
+Plug('junegunn/fzf', {
+  ['do'] = function()
+    vim.fn['fzf#install']()
+  end
+})
+Plug('junegunn/fzf.vim')
+
+Plug('tpope/vim-vinegar')
+Plug('tpope/vim-eunuch')
+Plug('tpope/vim-commentary')
+Plug('tpope/vim-fugitive')
+Plug('AndrewRadev/linediff.vim')
+Plug('tpope/vim-rhubarb')
+
+Plug('morhetz/gruvbox')
+Plug('airblade/vim-gitgutter')
+
+Plug('maxmellon/vim-jsx-pretty')
+Plug('hashivim/vim-terraform')
+Plug('cappyzawa/starlark.vim')
+
+vim.call('plug#end')
 
 local navic = require("nvim-navic")
 
+
+-- Configuration
+-- use bash to execute stuff
+vim.o.shell = '/bin/bash'
+
+-- tab stuff
+vim.o.shiftwidth = 2
+vim.o.tabstop = 2
+vim.o.autoindent = true
+vim.o.expandtab = true
+
+-- show line numbers
+vim.o.number = true
+
+-- highlight trailing spaces
+vim.api.nvim_set_hl(0, "ExtraWhitespace", { ctermbg = 'red', bg = 'red' })
+local whitespace_group = vim.api.nvim_create_augroup('HighlightWhiteSpace', { clear = true })
+vim.api.nvim_create_autocmd('ColorScheme', {
+  group = whitespace_group,
+  callback = function()
+    vim.api.nvim_set_hl(0, "ExtraWhitespace", { ctermbg = 'red', bg = 'red' })
+  end,
+})
+vim.api.nvim_create_autocmd({ 'BufWinEnter', 'InsertLeave' }, {
+  group = whitespace_group,
+  callback = function()
+    vim.fn.matchadd('ExtraWhitespace', [[\s\+$]])
+  end,
+})
+vim.api.nvim_create_autocmd('InsertEnter', {
+  group = whitespace_group,
+  callback = function()
+    vim.fn.matchadd('ExtraWhitespace', [[\s\+\%#\@<!$]])
+  end,
+})
+vim.api.nvim_create_autocmd('BufWinLeave', {
+  group = whitespace_group,
+  callback = function()
+    vim.fn.clearmatches()
+  end,
+})
+
+-- status bar
+vim.o.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
+
+-- Map <C-s> to save the file in insert mode and stay in insert mode
+
+-- save on enter
+vim.keymap.set('n', '<cr>', ':w<cr>', { noremap = true, silent = true })
+
+-- exit buffer on shift+escape
+vim.keymap.set('n', '<S-Esc>', ':q<cr>', { noremap = true, silent = true })
+
+-- clear highlights on space
+vim.keymap.set('n', '<space>', ':noh<cr>', { silent = true })
+
+-- use "o" in addition to enter for quickfix/locationlist
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'qf',
+  callback = function()
+    vim.keymap.set('n', 'o', '<cr>', { buffer = true })
+  end,
+})
+
+-- shorthand for window switching
+vim.keymap.set('n', '<C-S-h>', '<C-w>h', { noremap = true })
+vim.keymap.set('n', '<C-S-j>', '<C-w>j', { noremap = true })
+vim.keymap.set('n', '<C-S-k>', '<C-w>k', { noremap = true })
+vim.keymap.set('n', '<C-S-l>', '<C-w>l', { noremap = true })
+
+-- fast scrolling without moving cursor
+vim.keymap.set('n', '<C-e>', '10<C-e>', { noremap = true })
+vim.keymap.set('n', '<C-y>', '10<C-y>', { noremap = true })
+
+-- fast scrolling with cursor
+vim.keymap.set('n', '<C-j>', '10j', { noremap = true })
+vim.keymap.set('n', '<C-k>', '10k', { noremap = true })
+
+vim.keymap.set('v', '<C-j>', '10j', { noremap = true })
+vim.keymap.set('v', '<C-k>', '10k', { noremap = true })
+
+-- vim.keymap.set('i', '<C-j>', '<C-o>10j', {noremap = true})
+-- vim.keymap.set('i', '<C-k>', '<C-o>10k', {noremap = true})
+
+-- disable scratch preview window
+vim.o.completeopt = 'menu,menuone,noselect'
+
+-- enable mouse clicking and scrolling
+vim.o.mouse = 'a'
+
+-- open quickfix files in last used window
+vim.o.switchbuf = 'uselast'
+
+-- folds
+vim.o.foldlevel = 99
+vim.o.foldmethod = "expr"
+vim.o.foldexpr = "v:lua.vim.lsp.foldexpr()"
+-- close all toplevel folds
+vim.keymap.set('n', 'zT', ':%foldc<cr>')
+vim.keymap.set('n', 'zf', 'zA')
+
+-- color schemes
+vim.opt.termguicolors = true
+vim.cmd.syntax('enable')
+vim.g.gruvbox_contrast_dark = "dark"
+vim.cmd.colorscheme('gruvbox')
+
+-- terminal
+vim.api.nvim_create_user_command('OpenTerm', function(opts)
+  vim.cmd.vnew()
+  if opts.args ~= '' then
+    vim.cmd.term(opts.args)
+  else
+    vim.cmd.term()
+  end
+end, { nargs = '?' })
+vim.keymap.set('n', '<c-t>', ':OpenTerm<cr>')
+vim.keymap.set('t', '<S-Esc>', '<C-\\><C-n>')
+vim.cmd.cnoreabbrev('!', 'OpenTerm')
+
+-- increase maxmempattern to search in large files
+vim.o.maxmempattern = 2000000
+
+-- always use system clipboard for yanks
+-- vim.o.clipboard:append('unnamedplus')
+
+-- allow project-specific configs
+vim.o.exrc = true
+
+
+
+
+-- LSP
 -- neovim/nvim-lspconfig Mappings.
---
--- See `:help vim.diagnostic.*` for documentation on any of the below functions
+
 local opts = { noremap = true, silent = true }
 vim.keymap.set('n', 'ee', vim.diagnostic.open_float, opts)
 vim.keymap.set('n', 'eN', function() vim.diagnostic.jump({ count = -1, float = true }) end, opts)
@@ -83,17 +254,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 
+
+-- Auto completion
 -- hrsh7th/nvim-cmp Mappings.
---
-local cmp = require 'cmp'
+local cmp = require('cmp')
 cmp.setup({
   snippet = {
-    -- REQUIRED - you must specify a snippet engine
     expand = function(args)
       vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-      -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-      -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
-      -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
     end,
   },
   window = {
@@ -112,22 +280,10 @@ cmp.setup({
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
     { name = 'vsnip' }, -- For vsnip users.
-    -- { name = 'luasnip' }, -- For luasnip users.
-    -- { name = 'ultisnips' }, -- For ultisnips users.
-    -- { name = 'snippy' }, -- For snippy users.
   }, {
     { name = 'buffer' },
   })
 })
-
--- Set configuration for specific filetype.
--- cmp.setup.filetype('gitcommit', {
---   sources = cmp.config.sources({
---     { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
---   }, {
---     { name = 'buffer' },
---   })
--- })
 
 -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
 for _, v in pairs({ '/', '?' }) do
@@ -148,12 +304,3 @@ cmp.setup.cmdline(':', {
     { name = 'cmdline' }
   })
 })
-
-
--- LSP servers
-
-vim.lsp.enable({ 'vimls', 'gopls', 'bashls', 'yamlls', 'lua_ls' })
-
-vim.o.foldmethod = "expr"
-vim.o.foldexpr = "v:lua.vim.lsp.foldexpr()"
-vim.o.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
